@@ -7,9 +7,12 @@ var room,
   count,
   cursor,
   imijiz,
+  imij,
   naym,
+  guesser,
   sub,
   ges,
+  aaft,
   a = 0;
 var put = document.querySelectorAll("td");
 while (a < put.length) {
@@ -26,22 +29,10 @@ while (a < ol.length) {
   if (ol[a].className !== "ceep") ol[a].style.visibility = "hidden";
   a++;
 }
-var guesser,
-  maker = true;
 socit.on("connect", function () {
   // console.log("Chaynd");
 });
 
-socit.on("ges", (guess) => {
-  if(guess[2]===' '){
-    num=guess[0];
-    col=guess.substring(2)
-  }
-  else{
-    num=guess[0]+guess[1];
-    col=guess.substring(3)
-  }
-});
 
 function createRoom() {
   room = document.querySelector("input").value;
@@ -61,8 +52,14 @@ function choozMode() {
 }
 function play() {
   var radz = document.querySelectorAll(".rad");
-  if (radz[0].checked) guesser = false;
-  else guesser = true;
+  if (radz[0].checked){
+    guesser = false;
+    count=-1;
+  }
+  else{
+       guesser = true;
+       count=0;
+  }
   mode();
   var rim = document.querySelectorAll("input");
   var rim2 = document.querySelectorAll("button");
@@ -83,7 +80,6 @@ function play() {
 }
 function init() {
   cursor = {};
-  count = 1 - 1;
   cursor["black"] = "https://i.ibb.co/vQ7Y3qn/blac.png";
   cursor["blue"] = "https://i.ibb.co/MgWxBLg/blue.png";
   cursor["gray"] = "https://i.ibb.co/sWn0D77/gray.png";
@@ -110,6 +106,24 @@ function init() {
 
 init();
 
+socit.on("ges", (guess) => {
+  if(guess[1]===' '){
+    num=guess[0];
+    col=guess.substring(2)
+  }
+  else{
+    num=guess[0]+guess[1];
+    col=guess.substring(3)
+  }
+  numd=parseInt(num)
+  if(numd!=111&&numd!=112&&!(numd>10&&numd<17)){
+    if(col==='redPin'||col==='wytPin')
+        document.getElementById(num).innerHTML = '<img id="pinz" src="' + imijiz[col] + '">';
+    else
+        document.getElementById(num).innerHTML = '<img src="' + imijiz[col] + '">';
+  }
+});
+
 function clict() {
   var wich = this.id.toString();
   var thisWun = document.getElementById(wich);
@@ -126,7 +140,8 @@ function clict() {
     if (old != null) old.firstElementChild.style.border = "none";
     old = thisWun;
     colour = cul;
-    // problem starts here
+    ges = wich + " " + colour;
+    socit.emit("ges", ges);
     if (cul != "redPin" && cul != "wytPin") {
       var cursed = "url(" + cursor[colour] + "),move";
       document.querySelector("body").style.cursor = cursed;
@@ -137,11 +152,11 @@ function clict() {
       document.querySelector("body").style.cursor =
         "url(" + "https://i.ibb.co/dgw525d/wyt-Cursor.png" + "),move";
   } else {
-    if (colour != "redPin" && colour != "wytPin") {
+    ges = wich + " " + colour;
+    socit.emit("ges", ges);
+    if (colour != "redPin" && colour != "wytPin")
       thisWun.innerHTML = '<img src="' + imijiz[colour] + '">';
-      ges = wich + " " + colour;
-      socit.emit("ges", ges);
-    } else thisWun.innerHTML = '<img id="pinz" src="' + imijiz[colour] + '">';
+    else thisWun.innerHTML = '<img id="pinz" src="' + imijiz[colour] + '">';
   }
 }
 var all = document.querySelectorAll("td");
@@ -157,39 +172,51 @@ function mode() {
       .getElementById("00")
       .insertAdjacentHTML(
         "afterend",
-        '<img class="noBac" class="noGray" id="submitGes" onclick="submitGes()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
+        '<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
       );
     sub = document.querySelector("#submitGes");
   } else {
     document.querySelector("#colz").remove();
-    var imij = document.createElement("img");
+    imij = document.createElement("img");
     imij.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
     imij.setAttribute("id", "submitMayc");
     imij.setAttribute("class", "noBac");
-    imij.setAttribute("onclick", "submitMayc()");
-    document
-      .querySelector("span")
-      .insertBefore(imij, document.getElementById("000"));
+    imij.setAttribute("onclick", "submit()");
+    // document
+    //   .querySelector("span")
+    //   .insertBefore(imij, document.getElementById("000"));
   }
 }
 document.querySelector("#RW").style.cursor = "pointer";
-function submitMayc() {
-  count++;
-  imij.remove();
-  document
-    .querySelector("span")
-    .insertBefore(imij, document.getElementById("00" + count.toString()));
-  imij = document.querySelector("#submitMayc");
+
+function submit(){
+    if(guesser)
+        document.querySelector("#submitGes").style.visibility='hidden';
+    else
+        document.querySelector("#submitMayc").style.visibility='hidden';
+    console.log('sent')
+    socit.emit("sub", guesser)
 }
 
-function submitGes() {
-  var aaft = document.getElementById("0" + count.toString());
-  count++;
-  if (sub !== null) sub.remove();
-  aaft = document.getElementById("0" + count.toString());
-  aaft.insertAdjacentHTML(
-    "afterend",
-    '<img id="submitGes" onclick="submitGes()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
-  );
-  sub = document.querySelector("#submitGes");
-}
+socit.on("sub", sub=>{
+    count++;
+    if(sub!=guesser){
+        if(guesser){
+            aaft = document.getElementById("0" + count.toString());
+            aaft.insertAdjacentHTML(
+                "afterend",
+                '<img id="submitGes" class="noBac" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
+            );
+            sub = document.querySelector("#submitGes");
+            document.querySelector("#submitGes").style.visibility='';
+        }
+        else{
+            imij.remove();
+            document
+                .querySelector("span")
+                .insertBefore(imij, document.getElementById("00" + count.toString()));
+            imij = document.querySelector("#submitMayc");
+            document.querySelector("#submitMayc").style.visibility='';
+        }
+    }
+})

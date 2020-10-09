@@ -26,14 +26,15 @@ io.on("connection", (socket) => {
   socket.on("createRoom", (rom) => {
     room = rom;
     socket.join(room);
-    console.log(socket.rooms);
   });
   socket.on("newPlayer", (naym) => {
     console.log(naym + " joind " + room);
   });
   socket.on("ges", (ges) => {
-    console.log(room);
-    io.in(room).emit('ges', ges)
-    // socket.broadcast.to(room).emit("ges", ges);
+    // io.in(room).emit('ges', ges)
+    socket.broadcast.to(room).emit("ges", ges);
   });
+  socket.on("sub", guesser=>{
+    socket.broadcast.to(room).emit("sub", guesser);
+  })
 });
