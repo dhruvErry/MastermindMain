@@ -3,7 +3,8 @@ var engines = require("consolidate");
 var BP = require("body-parser");
 var express = require("express");
 var app = express();
-var room = 0;
+var room, count = 0;
+var roomz=[]
 
 app.use(BP.urlencoded({ extended: true }));
 
@@ -25,10 +26,22 @@ io.on("connection", (socket) => {
   console.log("Cunectid");
   socket.on("createRoom", (rom) => {
     room = rom;
-    socket.join(room);
+    if(!(roomz.hasOwnProperty(room))){
+        roomz[room]=1;
+        socket.join(room);
+        socket.emit('goUhed', 'g')
+    } 
+    else if(roomz[room]<2){
+        socket.join(room);
+        socket.emit('goUhed', 'g')
+        roomz[room]=roomz[room]+1;
+    }
+    else
+        socket.emit('eruu', 'e')
+    console.log(roomz)
   });
   socket.on("newPlayer", (naym) => {
-    console.log(naym + " joind " + room);
+    // console.log(naym + " joind " + room);
   });
   socket.on("ges", (ges) => {
     // io.in(room).emit('ges', ges)

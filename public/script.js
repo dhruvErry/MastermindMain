@@ -39,8 +39,16 @@ function createRoom() {
   naym = document.querySelector("#naym").value;
   socit.emit("createRoom", room);
   socit.emit("newPlayer", naym);
-  choozMode();
 }
+
+socit.on('goUhed', y=>{
+    document.querySelector('#error').style.visibility='hidden';
+    choozMode();
+})
+
+socit.on('eruu', g=>{
+    document.querySelector('#error').style.visibility='';
+})
 
 function choozMode() {
   var hydz = document.querySelectorAll(".hyd");
@@ -60,7 +68,7 @@ function play() {
        guesser = true;
        count=0;
   }
-  mode();
+  reset();
   var rim = document.querySelectorAll("input");
   var rim2 = document.querySelectorAll("button");
   var rim3 = document.querySelectorAll("p");
@@ -166,8 +174,10 @@ while (a < all.length) {
   all[a].addEventListener("click", clict);
   a++;
 }
-function mode() {
+function reset() {
   if (guesser === true) {
+    document.querySelector("#colz").style.visbility=''
+    document.querySelector("#RW").style.visbility='hidden'
     document
       .getElementById("00")
       .insertAdjacentHTML(
@@ -176,7 +186,8 @@ function mode() {
       );
     sub = document.querySelector("#submitGes");
   } else {
-    document.querySelector("#colz").remove();
+    document.querySelector("#colz").style.visbility='hidden'
+    document.querySelector("#RW").style.visbility=''
     imij = document.createElement("img");
     imij.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
     imij.setAttribute("id", "submitMayc");
