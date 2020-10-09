@@ -1,0 +1,82 @@
+* {
+  background-color: whitesmoke;
+}
+table {
+  margin: 1% 0 0.32em 39.8%;
+  /* 	border-collapse: collapse; */
+  border-spacing: 0px;
+  width: 3.3em;
+  height: 3.31em;
+  display: inline-table;
+}
+
+td {
+  background-color: rgb(175, 175, 175);
+  padding: 2px;
+  width: 20%;
+  /* 	border: 1px solid black; */
+}
+
+.noBorder {
+  border: none;
+}
+.after {
+  height: 3.3em;
+  width: 13.5em;
+  position: absolute;
+  margin-left: 0.4%;
+  /* 	margin-top: 2%; */
+}
+
+#colz {
+  /* 	width: 17.109999999999999em; */
+  margin: 12em 0 5% 19.5em;
+  position: absolute;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#RW {
+  position: absolute;
+  margin: 17.2em 0 0 7em;
+  display: inline-table;
+}
+
+span {
+  margin-left: 0;
+  display: inline-table;
+  width: 100%;
+}
+
+img {
+  width: 2.1em;
+  padding: 0;
+  background-color: rgb(175, 175, 175);
+}
+
+.noBac,
+.noGray {
+  background-color: whitesmoke;
+}
+.butin {
+  width: 0.46em;
+}
+.butinAft {
+  width: 748em;
+}
+#submitGes {
+  position: absolute;
+  margin-top: 1.08%;
+  margin-left: 18.8%;
+}
+
+#submitMayc {
+  position: absolute;
+  margin-left: 35.2%;
+  /* 	margin-bottom: 20%; */
+  margin-top: 1.08em;
+}
+
+#pinz {
+  width: 0.8em;
+}
