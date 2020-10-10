@@ -7,27 +7,32 @@
 	<button class="ceep" type="button" onclick="createRoom()">
 		Enter Room
 	</button>
-    <p id='error'>Room Full!</p>
-	<p class='hyd' style="visibility: hidden;">Which one?</p>
-	<input class="hyd rad" style="visibility: hidden;" type="radio" name="mode" value="maker">CodeMaker
-	<input class="hyd rad" style="visibility: hidden;" type="radio" name="mode" value="guesser">CodeGuesser
+    <p id='error' class='cept'>Room Full!</p>
+	<p class='hyd dil' style="visibility: hidden;">Which one?</p>
+	<input class="hyd rad" style="visibility: hidden;" type="radio" name="mode" value="maker"><span class='hyd dil'>CodeMaker</span>
+	<input class="hyd rad" style="visibility: hidden;" type="radio" name="mode" value="guesser"><span class='hyd dil'>CodeGuesser</span>
 	<button class="hyd" style="visibility: hidden;" type="button" onclick="play()">
 		Master the Mind!
 	</button>
 	<table id="RW">
 		<tr>
 			<td class='noGray' id="111" data-colour="redPin">
-				<img class='noBac' src="https://i.ibb.co/vZ2ffPL/redPin.png" />
+				<img class='noBac ryt' src="https://i.ibb.co/vZ2ffPL/redPin.png" />
 			</td>
 		</tr>
 		<tr>
 			<td class='noGray' id="112" data-colour="wytPin">
-				<img class='noBac' src="https://i.ibb.co/Ps2n1r0/wytPin.png" />
+				<img class='noBac ryt' src="https://i.ibb.co/Ps2n1r0/wytPin.png" />
 			</td>
 		</tr>
+        <tr>
+            <td class='noGray' id='113' data-colour='curect' onclick='reset(true)'>
+                <img class='noBac' id="curect" src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-6/177800/270-512.png">
+            </td>
+        </tr>
 	</table>
 
-	<span>
+	<span id='spa'>
 		<!-- 	<table id="obs">
 	</table> -->
 		<table id="009">

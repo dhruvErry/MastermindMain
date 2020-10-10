@@ -30,7 +30,7 @@ td {
 
 #colz {
   /* 	width: 17.109999999999999em; */
-  margin: 12em 0 5% 19.5em;
+  margin: 12em 0 5% 20.2em;
   position: absolute;
   display: inline-block;
   cursor: pointer;
@@ -38,11 +38,11 @@ td {
 
 #RW {
   position: absolute;
-  margin: 17.2em 0 0 7em;
+  margin: 15.9em 0 0 20em;
   display: inline-table;
 }
 
-span {
+#spa {
   margin-left: 0;
   display: inline-table;
   width: 100%;
@@ -83,4 +83,15 @@ img {
 
 #error{
     color: red;
+}
+
+#curect{
+    position: sticky;
+    padding-top: 1.5em;
+    margin-right: 5em;
+    width: 2.7em;
+}
+
+.ryt{
+    padding-left: .35em;
 }

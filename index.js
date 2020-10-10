@@ -50,4 +50,7 @@ io.on("connection", (socket) => {
   socket.on("sub", guesser=>{
     socket.broadcast.to(room).emit("sub", guesser);
   })
+  socket.on('curect', q=>{
+    socket.broadcast.to(room).emit('curect', 'j')
+  })
 });
