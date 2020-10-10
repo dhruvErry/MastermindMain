@@ -149,7 +149,7 @@ function clict() {
         old = thisWun;
         colour = cul;
         ges = wich + " " + colour;
-        socit.emit("ges", ges);
+        socit.emit("ges", {guess:ges, rom:room});
         if (cul != "redPin" && cul != "wytPin") {
             var cursed = "url(" + cursor[colour] + "),move";
             document.querySelector("body").style.cursor = cursed;
@@ -161,7 +161,7 @@ function clict() {
                 "url(" + "https://i.ibb.co/dgw525d/wyt-Cursor.png" + "),move";
     } else {
         ges = wich + " " + colour;
-        socit.emit("ges", ges);
+        socit.emit("ges", {guess:ges, rom:room});
         if (colour != "redPin" && colour != "wytPin")
             thisWun.innerHTML = '<img src="' + imijiz[colour] + '">';
         else thisWun.innerHTML = '<img id="pinz" src="' + imijiz[colour] + '">';
@@ -176,7 +176,7 @@ while (a < all.length) {
 }
 function reset(sent) {
     if (sent)
-        socit.emit('curect', 'g');
+        socit.emit('curect', room);
     guesser = !guesser;
     var butinz = document.querySelectorAll('td');
     a = 0;
@@ -233,7 +233,7 @@ function submit() {
     else
         document.querySelector("#submitMayc").style.visibility = 'hidden';
     console.log('sent')
-    socit.emit("sub", guesser)
+    socit.emit("sub", {gesser: guesser, rom:room})
 }
 
 socit.on("sub", sub => {

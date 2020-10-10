@@ -43,14 +43,14 @@ io.on("connection", (socket) => {
   socket.on("newPlayer", (naym) => {
     // console.log(naym + " joind " + room);
   });
-  socket.on("ges", (ges) => {
+  socket.on("ges", data=> {
     // io.in(room).emit('ges', ges)
-    socket.broadcast.to(room).emit("ges", ges);
+    socket.broadcast.to(data.rom).emit("ges", data.guess);
   });
-  socket.on("sub", guesser=>{
-    socket.broadcast.to(room).emit("sub", guesser);
+  socket.on("sub", data=>{
+    socket.broadcast.to(data.rom).emit("sub", data.gesser);
   })
   socket.on('curect', q=>{
-    socket.broadcast.to(room).emit('curect', 'j')
+    socket.broadcast.to(q).emit('curect', 'j')
   })
 });
