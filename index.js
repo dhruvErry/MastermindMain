@@ -53,4 +53,7 @@ io.on("connection", (socket) => {
   socket.on('curect', q=>{
     socket.broadcast.to(q).emit('curect', 'j')
   })
+  socket.on('code', s=>{
+      socket.broadcast.to(s).emit('code', 'g')
+  })
 });

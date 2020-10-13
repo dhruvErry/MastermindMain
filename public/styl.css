@@ -43,6 +43,7 @@ td {
 }
 
 #spa {
+  margin-top: 2%;
   margin-left: 0;
   display: inline-table;
   width: 100%;
@@ -83,6 +84,8 @@ img {
 
 #error{
     color: red;
+    /* margin-left: 5%; */
+    position: absolute;
 }
 
 #curect{
@@ -94,4 +97,28 @@ img {
 
 .ryt{
     padding-left: .35em;
+}
+
+#cowd{
+    height: 3.3em;
+    width: 13.5em;
+    margin-top: 2.83%;
+    position: absolute;
+    margin-left: 10%;
+}
+
+#kode{
+    margin-left: 28%;
+    margin-top: 3.18%;
+    position: absolute;
+}
+
+#not{
+    /* display: inline; */
+  margin: 0 auto;
+  margin-top: 2%;
+  display: block;
+  text-align: center;
+  font-family: "Press Start 2P";
+  font-size: 15px;
 }

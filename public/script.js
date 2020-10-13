@@ -8,6 +8,7 @@ var room,
     cursor,
     imijiz,
     imij,
+    code,
     naym,
     guesser,
     sub,
@@ -47,6 +48,7 @@ socit.on('goUhed', y => {
 })
 
 socit.on('curect', r => {
+    document.querySelector('#not').innerHTML='You guessed the code in '+(count+1)+' turns!'
     reset(false)
 })
 
@@ -86,6 +88,7 @@ function play() {
     }
     reset(false);
 }
+
 function init() {
     cursor = {};
     cursor["black"] = "https://i.ibb.co/vQ7Y3qn/blac.png";
@@ -113,7 +116,6 @@ function init() {
 }
 
 init();
-
 socit.on("ges", (guess) => {
     if (guess[1] === ' ') {
         num = guess[0];
@@ -133,6 +135,7 @@ socit.on("ges", (guess) => {
 });
 
 function clict() {
+    // set id of code
     var wich = this.id.toString();
     var thisWun = document.getElementById(wich);
     var cul = thisWun.getAttribute("data-colour");
@@ -141,7 +144,7 @@ function clict() {
         thisWun.firstElementChild.style.borderRadius = "50%";
     }
     if (
-        (parseInt(this.id) > 9 && parseInt(this.id) < 18) ||
+        (parseInt(this.id) > 10 && parseInt(this.id) < 19) ||
         parseInt(this.id) === 111 ||
         parseInt(this.id) === 112 || parseInt(this.id) === 113
     ) {
@@ -169,14 +172,20 @@ function clict() {
 }
 var all = document.querySelectorAll("td");
 a = 0;
+var d=0;
 while (a < all.length) {
-    if (all[a].id != "111" && all[a].id != "112" && all[a].id != '113') all[a].setAttribute("id", a);
+    if (all[a].id != "111" && all[a].id != "112" && all[a].id != '113'&&(!all[a].className.includes('code')))
+    all[a].setAttribute("id", d);
     all[a].addEventListener("click", clict);
+    if(!all[a].className.includes('code'))
+        d++;
     a++;
 }
 function reset(sent) {
-    if (sent)
+    if (sent){
         socit.emit('curect', room);
+        document.querySelector('#not').innerHTML='He guessed the code in '+(count+1)+' turns!'
+    }
     guesser = !guesser;
     var butinz = document.querySelectorAll('td');
     a = 0;
@@ -192,22 +201,22 @@ function reset(sent) {
         if (document.querySelector("#submitMayc") != null)
             document.querySelector("#submitMayc").style.visibility = 'hidden';
         count = 0;
+        document.querySelector('#cowd').style.visibility='hidden'
         document.querySelector("#colz").style.visibility = ''
         document.querySelector("#RW").style.visibility = 'hidden'
-        document
-            .getElementById("00")
-            .insertAdjacentHTML(
-                "afterend",
-                '<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
-            );
         sub = document.querySelector("#submitGes");
     } else {
-        console.log('swicht')
+        document.querySelector('#cowd').style.visibility=''
         if (document.querySelector("#submitGes") != null)
             document.querySelector("#submitGes").style.visibility = 'hidden';
         count = -1;
-        document.querySelector("#colz").style.visibility = 'hidden'
         document.querySelector("#RW").style.visibility = ''
+        code = document.createElement("img");
+        code.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
+        code.setAttribute("id", "kode");
+        code.setAttribute("class", "noBac");
+        code.setAttribute("onclick", "submitCode()");
+
         imij = document.createElement("img");
         imij.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
         imij.setAttribute("id", "submitMayc");
@@ -217,15 +226,17 @@ function reset(sent) {
         // document
         //   .querySelector("span")
         //   .insertBefore(imij, document.getElementById("000"));
+        document
+          .querySelector("body")
+          .insertBefore(code, document.getElementById("RW"));
     }
     var col=document.querySelectorAll("td");
-    a=11;
-    while(a<19){
+    a=15;
+    while(a<23){
         col[a].firstElementChild.setAttribute('class', 'noBac')
         a++;
     }
 }
-document.querySelector("#RW").style.cursor = "pointer";
 
 function submit() {
     if (guesser)
@@ -235,6 +246,18 @@ function submit() {
     console.log('sent')
     socit.emit("sub", {gesser: guesser, rom:room})
 }
+
+function submitCode(){
+    document.getElementById('kode').remove();
+    document.querySelector("#colz").style.visibility = 'hidden'
+    socit.emit('code', room)
+}
+
+socit.on('code', l=>{
+    document.getElementById("00").insertAdjacentHTML("afterend",'<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">');
+})
+
+
 
 socit.on("sub", sub => {
     count++;
@@ -258,3 +281,5 @@ socit.on("sub", sub => {
         }
     }
 })
+
+document.querySelector("#RW").style.cursor = "pointer";
