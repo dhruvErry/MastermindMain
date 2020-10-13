@@ -27,7 +27,7 @@ while (a < put.length) {
 var ol = document.getElementsByTagName("*");
 a = 0;
 while (a < ol.length) {
-    if (ol[a].className !== "ceep") ol[a].style.visibility = "hidden";
+    if (!ol[a].className.includes("ceep")) ol[a].style.visibility = "hidden";
     a++;
 }
 socit.on("connect", function() {
@@ -49,7 +49,7 @@ socit.on('goUhed', y => {
 
 socit.on('curect', r => {
     document.querySelector('#not').innerHTML='You guessed the code in '+(count+1)+' turns!'
-    reset(false)
+    setTimeout(reset, 3000, false)
 })
 
 socit.on('eruu', g => {
@@ -87,7 +87,7 @@ function play() {
     a = 0;
     var ol = document.getElementsByTagName("*");
     while (a < ol.length) {
-        if (ol[a].className !== "cept") ol[a].style.visibility = "";
+        if (!ol[a].className.includes("cept")) ol[a].style.visibility = "";
         a++;
     }
     reset(false);
@@ -143,7 +143,7 @@ function clict() {
     var wich = this.id.toString();
     var thisWun = document.getElementById(wich);
     var cul = thisWun.getAttribute("data-colour");
-    if (thisWun.className === "noBorder") {
+    if (thisWun.className.includes("noBorder")) {
         thisWun.firstElementChild.style.border = "2px solid black";
         thisWun.firstElementChild.style.borderRadius = "50%";
     }
@@ -188,9 +188,9 @@ while (a < all.length) {
 function reset(sent) {
     if (sent){
         socit.emit('curect', room);
-        document.querySelector('#not').innerHTML='He guessed the code in '+(count+1)+' turns!'
-    }
-    guesser = !guesser;
+        document.querySelector('#not').innerHTML='He guessed the code in '+(count+1)+' turn(s)!'
+        setTimeout(function(){
+            guesser = !guesser;
     var butinz = document.querySelectorAll('td');
     a = 0;
     while (a < butinz.length) {
@@ -202,6 +202,7 @@ function reset(sent) {
         a++;
     }
     if (guesser === true) {
+        document.querySelector('#not').innerHTML='Waiting for opponent to set code...'
         if (document.querySelector("#submitMayc") != null)
             document.querySelector("#submitMayc").style.visibility = 'hidden';
         count = 0;
@@ -210,6 +211,7 @@ function reset(sent) {
         document.querySelector("#RW").style.visibility = 'hidden'
         sub = document.querySelector("#submitGes");
     } else {
+        document.querySelector('#not').innerHTML='Set code now!'
         document.querySelector('#cowd').style.visibility=''
         if (document.querySelector("#submitGes") != null)
             document.querySelector("#submitGes").style.visibility = 'hidden';
@@ -234,31 +236,96 @@ function reset(sent) {
           .querySelector("body")
           .insertBefore(code, document.getElementById("RW"));
     }
-    var col=document.querySelectorAll("td");
+    col=document.querySelectorAll("td");
     a=15;
     while(a<23){
         col[a].firstElementChild.setAttribute('class', 'noBac')
         a++;
+    }}, 3000)}
+    else{
+    guesser = !guesser;
+    var butinz = document.querySelectorAll('td');
+    a = 0;
+    while (a < butinz.length) {
+        var butID = parseInt(butinz[a].id)
+        if (butID > 2 && (butID < 11 || butID > 18) && butID < 110)
+            butinz[a].innerHTML = '<img class="butin" src="' +
+                'https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png"' +
+                ">";
+        a++;
     }
+    if (guesser === true) {
+        document.querySelector('#not').innerHTML='Waiting for opponent to set code...'
+        if (document.querySelector("#submitMayc") != null)
+            document.querySelector("#submitMayc").style.visibility = 'hidden';
+        count = 0;
+        document.querySelector('#cowd').style.visibility='hidden'
+        document.querySelector("#colz").style.visibility = ''
+        document.querySelector("#RW").style.visibility = 'hidden'
+        sub = document.querySelector("#submitGes");
+    } else {
+        document.querySelector('#not').innerHTML='Set code now!'
+        document.querySelector('#cowd').style.visibility=''
+        if (document.querySelector("#submitGes") != null)
+            document.querySelector("#submitGes").style.visibility = 'hidden';
+        count = -1;
+        document.querySelector("#RW").style.visibility = ''
+        code = document.createElement("img");
+        code.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
+        code.setAttribute("id", "kode");
+        code.setAttribute("class", "noBac");
+        code.setAttribute("onclick", "submitCode()");
+
+        imij = document.createElement("img");
+        imij.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
+        imij.setAttribute("id", "submitMayc");
+        imij.setAttribute("class", "noBac");
+        imij.setAttribute("onclick", "submit()");
+        document.getElementById('113').innerHTML = "<img class='noBac' id='curect' src='https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-6/177800/270-512.png'>"
+        // document
+        //   .querySelector("span")
+        //   .insertBefore(imij, document.getElementById("000"));
+        document
+          .querySelector("body")
+          .insertBefore(code, document.getElementById("RW"));
+    }
+    col=document.querySelectorAll("td");
+    a=15;
+    while(a<23){
+        col[a].firstElementChild.setAttribute('class', 'noBac')
+        a++;
+    }}
 }
 
 function submit() {
-    if (guesser)
+    if (guesser){
+        document.querySelector('#not').innerHTML='Waiting for opponent to set pins...'
         document.querySelector("#submitGes").style.visibility = 'hidden';
-    else
+    }
+    else{
         document.querySelector("#submitMayc").style.visibility = 'hidden';
+        document.querySelector('#not').innerHTML='Waiting for opponent to set guess...'
+    }
     console.log('sent')
     socit.emit("sub", {gesser: guesser, rom:room})
 }
 
 function submitCode(){
+    document.querySelector('#not').innerHTML='Waiting for opponent to set guess...'
     document.getElementById('kode').remove();
     document.querySelector("#colz").style.visibility = 'hidden'
     socit.emit('code', room)
 }
 
 socit.on('code', l=>{
+    document.querySelector('#not').innerHTML='Make your guess!'
     document.getElementById("00").insertAdjacentHTML("afterend",'<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">');
+    col=document.querySelectorAll("td");
+    a=15;
+    while(a<23){
+        col[a].firstElementChild.setAttribute('class', 'noBac')
+        a++;
+    }
 })
 
 
@@ -267,6 +334,7 @@ socit.on("sub", sub => {
     count++;
     if (sub != guesser) {
         if (guesser) {
+            document.querySelector('#not').innerHTML='Make your guess!'
             aaft = document.getElementById("0" + count.toString());
             aaft.insertAdjacentHTML(
                 "afterend",
@@ -276,6 +344,7 @@ socit.on("sub", sub => {
             document.querySelector("#submitGes").style.visibility = '';
         }
         else {
+            document.querySelector('#not').innerHTML='Set pins now!'
             imij.remove();
             document
                 .querySelector("span")

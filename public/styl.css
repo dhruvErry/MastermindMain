@@ -114,11 +114,16 @@ img {
 }
 
 #not{
+  font-family: "Press Start 2P";
     /* display: inline; */
   margin: 0 auto;
   margin-top: 2%;
   display: block;
   text-align: center;
-  font-family: "Press Start 2P";
   font-size: 15px;
+}
+
+.fontz{
+  font-family: "Press Start 2P";
+  font-size: 13px;
 }
