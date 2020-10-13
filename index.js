@@ -5,6 +5,7 @@ var express = require("express");
 var app = express();
 var room, count = 0;
 var roomz=[]
+var idRoom=[]
 
 app.use(BP.urlencoded({ extended: true }));
 
@@ -29,10 +30,12 @@ io.on("connection", (socket) => {
     if(!(roomz.hasOwnProperty(room))){
         roomz[room]=1;
         socket.join(room);
+        idRoom[socket.id]=room;
         socket.emit('goUhed', 'g')
     } 
     else if(roomz[room]<2){
         socket.join(room);
+        idRoom[socket.id]=room;
         socket.emit('goUhed', 'g')
         roomz[room]=roomz[room]+1;
     }
@@ -55,5 +58,9 @@ io.on("connection", (socket) => {
   })
   socket.on('code', s=>{
       socket.broadcast.to(s).emit('code', 'g')
+  })
+  socket.on('disconnect', p=>{
+      roomz[idRoom[socket.id]]=roomz[idRoom[socket.id]]-1
+      console.log(roomz)
   })
 });

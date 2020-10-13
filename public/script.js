@@ -56,6 +56,10 @@ socit.on('eruu', g => {
     document.querySelector('#error').style.visibility = '';
 })
 
+socit.on('disconnect', p=>{
+    socit.emit('chec', p)
+} )
+
 function choozMode() {
     var hydz = document.querySelectorAll(".hyd");
     a = 0;
