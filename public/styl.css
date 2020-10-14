@@ -1,3 +1,8 @@
+@font-face {
+  font-family: myFont;
+  src: url(shicAagow.ttf);
+}
+
 * {
   background-color: whitesmoke;
 }
@@ -11,7 +16,7 @@ table {
 }
 
 td {
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(214, 213, 213);
   padding: 2px;
   width: 20%;
   /* 	border: 1px solid black; */
@@ -52,7 +57,7 @@ td {
 img {
   width: 2.1em;
   padding: 0;
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(214, 213, 213);
 }
 
 .noBac,
@@ -82,48 +87,50 @@ img {
   width: 0.8em;
 }
 
-#error{
-    color: red;
-    /* margin-left: 5%; */
-    position: absolute;
+#error {
+  color: red;
+  /* margin-left: 5%; */
+  position: absolute;
 }
 
-#curect{
-    position: sticky;
-    padding-top: 1.5em;
-    margin-right: 5em;
-    width: 2.7em;
+#curect {
+  position: sticky;
+  padding-top: 1.5em;
+  margin-right: 5em;
+  width: 2.7em;
 }
 
-.ryt{
-    padding-left: .35em;
+.ryt {
+  padding-left: 0.35em;
 }
 
-#cowd{
-    height: 3.3em;
-    width: 13.5em;
-    margin-top: 2.83%;
-    position: absolute;
-    margin-left: 10%;
+#cowd {
+  height: 3.3em;
+  width: 13.5em;
+  margin-top: 2.83%;
+  position: absolute;
+  margin-left: 10%;
 }
 
-#kode{
-    margin-left: 28%;
-    margin-top: 3.18%;
-    position: absolute;
+#kode {
+  margin-left: 28%;
+  margin-top: 3.18%;
+  position: absolute;
 }
 
-#not{
-  font-family: "Press Start 2P";
-    /* display: inline; */
+#not {
+  /* font-family: "Press Start 2P"; */
+  font-family: "myFont";
+  /* display: inline; */
   margin: 0 auto;
   margin-top: 2%;
   display: block;
   text-align: center;
-  font-size: 15px;
+  font-size: 21.8px;
 }
 
-.fontz{
-  font-family: "Press Start 2P";
-  font-size: 13px;
+.fontz {
+  /* font-family: "Press Start 2P"; */
+  font-family: "myFont";
+  font-size: 17px;
 }
