@@ -18,8 +18,12 @@ server.listen(8080, process.env.PORT, function () {
   console.log("Server Is Up");
 });
 
-app.get("/", function (req, res) {
+app.get("/play", function (req, res) {
   res.render("game.html");
+});
+
+app.get("/", function (req, res) {
+  res.render("roolz.html");
 });
 
 var io = require("socket.io").listen(server);
