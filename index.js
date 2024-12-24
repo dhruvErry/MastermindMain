@@ -14,7 +14,7 @@ app.engine("html", engines.mustache);
 app.use(express.static("public"));
 
 var server = http.createServer(app);
-server.listen(8080, process.env.PORT, function () {
+server.listen(process.env.PORT || 8080, function () {
   console.log("Server Is Up");
 });
 
