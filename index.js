@@ -14,7 +14,7 @@ app.engine("html", engines.mustache);
 app.use(express.static("public"));
 
 var server = http.createServer(app);
-server.listen(process.env.PORT || 8080, function () {
+server.listen(8080, process.env.PORT, function () {
   console.log("Server Is Up");
 });
 
@@ -36,11 +36,11 @@ io.on("connection", (socket) => {
       roomz[room] = 1;
       socket.join(room);
       idRoom[socket.id] = room;
-      socket.emit("goUhed", "g");
+      socket.emit("fuust", "g");
     } else if (roomz[room] < 2) {
       socket.join(room);
       idRoom[socket.id] = room;
-      socket.emit("goUhed", "g");
+      socket.emit("secind", "g");
       roomz[room] = roomz[room] + 1;
     } else socket.emit("eruu", "e");
     console.log(roomz);
@@ -61,8 +61,19 @@ io.on("connection", (socket) => {
   socket.on("code", (s) => {
     socket.broadcast.to(s).emit("code", "g");
   });
+  socket.on("fuust", (y) => {
+    socket.broadcast.to(y.rom).emit("secindPlay", y.bool);
+  });
   socket.on("disconnect", (p) => {
     roomz[idRoom[socket.id]] = roomz[idRoom[socket.id]] - 1;
     console.log(roomz);
+    if (isEmpty(io.sockets.adapter.rooms)) roomz = [];
   });
 });
+
+function isEmpty(obj) {
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) return false;
+  }
+  return true;
+}
