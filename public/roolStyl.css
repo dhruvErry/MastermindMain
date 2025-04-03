@@ -1,0 +1,44 @@
+@font-face {
+  font-family: nawmil;
+  src: url(shicAagow.ttf);
+}
+
+@font-face {
+  font-family: lyt;
+  src: url(shicLyt.ttf);
+}
+h2 {
+  margin-left: 1%;
+  margin-right: 1%;
+  font-family: "nawmil";
+  font-size: 41px;
+}
+p {
+  margin-left: 1%;
+  margin-right: 1%;
+  font-family: "lyt";
+  line-height: 200%;
+  font-size: 21.3px;
+}
+#imper {
+  color: red;
+}
+#chaynj {
+  background-color: firebrick;
+  color: white;
+}
+.i {
+  margin-left: 1%;
+  margin-right: 1%;
+  display: inline-block;
+}
+img {
+  margin-left: 1%;
+  margin-right: 1%;
+  border: 0.9px solid grey;
+}
+input {
+  margin-left: 1%;
+  font-family: "nawmil";
+  font-size: 25px;
+}

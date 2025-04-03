@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="ceep">
+  <body class="ceep">
+    <input
+      class="ceep fontz"
+      type="text"
+      name="roomNaym"
+      placeholder="Room Name"
+    />
+    <input class="ceep fontz" type="text" id="naym" placeholder="Your Name" />
+    <button class="ceep fontz" type="button" onclick="createRoom()">
+      Enter Room
+    </button>
+    <p id="error" class="cept fontz">Room Full!</p>
+    <p class="hyd dil fontz" id="edit" style="visibility: hidden;">
+      Which one?
+    </p>
+    <input
+      class="hyd rad fontz"
+      style="visibility: hidden;"
+      type="radio"
+      name="mode"
+      value="maker"
+    /><span class="hyd dil fontz">CodeMaker</span>
+    <input
+      class="hyd rad fontz"
+      style="visibility: hidden;"
+      type="radio"
+      name="mode"
+      value="guesser"
+    /><span class="hyd dil fontz">CodeGuesser</span>
+    <button
+      class="hyd fontz"
+      style="visibility: hidden;"
+      type="button"
+      onclick="play(true)"
+    >
+      Master the Mind!
+    </button>
+    <p id="not" class="fontz"></p>
+    <table id="cowd">
+      <tr>
+        <td class="code" id="999" align="center">
+          <img src="#" style="visibility: hidden;" class="cept" />
+        </td>
+        <td class="code" id="998" align="center">
+          <img src="#" style="visibility: hidden;" class="cept" />
+        </td>
+        <td class="code" id="997" align="center">
+          <img src="#" style="visibility: hidden;" class="cept" />
+        </td>
+        <td class="code" id="996" align="center">
+          <img src="#" style="visibility: hidden;" class="cept" />
+        </td>
+      </tr>
+    </table>
+    <table id="RW">
+      <tr>
+        <td class="noGray" id="114" data-colour="trash">
+          <img class="noBac ryt" src="https://i.ibb.co/bzPm5LN/download.png" />
+        </td>
+      </tr>
+      <tr>
+        <td class="noGray" id="111" data-colour="redPin">
+          <img class="noBac ryt" src="https://i.ibb.co/vZ2ffPL/redPin.png" />
+        </td>
+      </tr>
+      <tr>
+        <td class="noGray" id="112" data-colour="wytPin">
+          <img class="noBac ryt" src="https://i.ibb.co/Ps2n1r0/wytPin.png" />
+        </td>
+      </tr>
+      <tr>
+        <td class="noGray" id="113" data-colour="curect" onclick="reset(true)">
+          <img
+            class="noBac"
+            id="curect"
+            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-6/177800/270-512.png"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <span id="spa">
+      <!-- 	<table id="obs">
+	</table> -->
+      <table id="009">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="09" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <table id="colz">
+        <tr>
+          <td class="noBorder noGray" data-colour="red">
+            <img class="noBac" src="https://i.ibb.co/QHt1CDv/red.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="blue">
+            <img class="noBac" src="https://i.ibb.co/5vp1V3S/blue.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="orange">
+            <img class="noBac" src="https://i.ibb.co/d62Cm05/orinj.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="green">
+            <img class="noBac" src="https://i.ibb.co/QYxm7Jb/green.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="purple">
+            <img class="noBac" src="https://i.ibb.co/Jn62B7v/purple.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="gray">
+            <img class="noBac" src="https://i.ibb.co/x29KRS5/yelDaac.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="black">
+            <img class="noBac" src="https://i.ibb.co/9372X2b/blac.png" />
+          </td>
+        </tr>
+        <tr>
+          <td class="noBorder noGray" data-colour="pink">
+            <img class="noBac" src="https://i.ibb.co/tbqP8qP/pingc.png" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="008">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="08" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="007">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="07" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="006">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="06" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="005">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="05" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="004">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="04" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="003">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="03" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="002">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="02" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="001">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="01" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table id="000">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+
+      <table id="00" class="after">
+        <tr>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+          <td align="center">
+            <img src="#" style="visibility: hidden;" class="cept" />
+          </td>
+        </tr>
+      </table>
+    </span>
+  </body>
+
+  <head class="ceep">
+    <title>MasterMind</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styl.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+  </head>
+</html>
