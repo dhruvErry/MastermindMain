@@ -41,9 +41,20 @@ function createRoom() {
   socit.emit("newPlayer", naym);
 }
 
-socit.on("goUhed", (y) => {
+socit.on("fuust", (y) => {
   document.querySelector("#error").style.visibility = "hidden";
   choozMode();
+});
+
+socit.on("secind", (y) => {
+  document.querySelector("#edit").style.visibility = "";
+  document.querySelector("#edit").innerHTML =
+    "Waiting for opponent to choose role...";
+});
+
+socit.on("secindPlay", (bool) => {
+  guesser = !bool;
+  play(false);
 });
 
 socit.on("curect", (r) => {
@@ -68,10 +79,14 @@ function choozMode() {
     a++;
   }
 }
-function play() {
-  var radz = document.querySelectorAll(".rad");
-  if (radz[0].checked) guesser = true;
-  else guesser = false;
+
+function play(bool) {
+  if (bool) {
+    var radz = document.querySelectorAll(".rad");
+    if (radz[0].checked) guesser = true;
+    else guesser = false;
+    socit.emit("fuust", { bool: guesser, rom: room });
+  }
   var rim = document.querySelectorAll("input");
   var rim2 = document.querySelectorAll("button");
   var rim3 = document.querySelectorAll(".dil");
@@ -113,8 +128,9 @@ function init() {
   imijiz["purple"] = "https://i.ibb.co/Jn62B7v/purple.png";
   imijiz["red"] = "https://i.ibb.co/QHt1CDv/red.png";
   imijiz["redPin"] = "https://i.imgur.com/nBsXJBa.png";
-  imijiz["wytPin"] =
-    "https://i.ibb.co/vYt93Tb/glosee.png";
+  imijiz["wytPin"] = "https://i.ibb.co/vYt93Tb/glosee.png";
+  imijiz["trash"] =
+    "https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png";
 }
 
 init();
@@ -127,10 +143,20 @@ socit.on("ges", (guess) => {
     col = guess.substring(3);
   }
   var numd = parseInt(num);
-  if (numd != 111 && numd != 112 && numd != 113 && !(numd > 10 && numd < 17)) {
+  if (
+    numd != 111 &&
+    numd != 112 &&
+    numd != 113 &&
+    numd != 114 &&
+    !(numd > 11 && numd < 20)
+  ) {
+    console.log(col);
     if (col === "redPin" || col === "wytPin")
       document.getElementById(num).innerHTML =
         '<img id="pinz" src="' + imijiz[col] + '">';
+    // else if (col === "trash")
+    //   document.getElementById(num).innerHTML =
+    //     '<img id="butin" src="' + imijiz[col] + '">';
     else
       document.getElementById(num).innerHTML =
         '<img src="' + imijiz[col] + '">';
@@ -147,10 +173,11 @@ function clict() {
     thisWun.firstElementChild.style.borderRadius = "50%";
   }
   if (
-    (parseInt(this.id) > 10 && parseInt(this.id) < 19) ||
+    (parseInt(this.id) > 11 && parseInt(this.id) < 20) ||
     parseInt(this.id) === 111 ||
     parseInt(this.id) === 112 ||
-    parseInt(this.id) === 113
+    parseInt(this.id) === 113 ||
+    parseInt(this.id) === 114
   ) {
     if (old != null) old.firstElementChild.style.border = "none";
     old = thisWun;
@@ -169,12 +196,15 @@ function clict() {
   } else {
     ges = wich + " " + colour;
     socit.emit("ges", { guess: ges, rom: room });
-    if (colour != "redPin" && colour != "wytPin")
+    if (colour != "redPin" && colour != "wytPin" && colour != "trash")
       thisWun.innerHTML = '<img src="' + imijiz[colour] + '">';
+    else if (colour === "trash")
+      thisWun.innerHTML = '<img class="butin" src="' + imijiz[colour] + '">';
     else thisWun.innerHTML = '<img id="pinz" src="' + imijiz[colour] + '">';
   }
 }
 var all = document.querySelectorAll("td");
+console.log("test");
 a = 0;
 var d = 0;
 while (a < all.length) {
@@ -182,6 +212,7 @@ while (a < all.length) {
     all[a].id != "111" &&
     all[a].id != "112" &&
     all[a].id != "113" &&
+    all[a].id != "114" &&
     !all[a].className.includes("code")
   )
     all[a].setAttribute("id", d);
@@ -200,7 +231,7 @@ function reset(sent) {
       a = 0;
       while (a < butinz.length) {
         var butID = parseInt(butinz[a].id);
-        if (butID > 2 && (butID < 11 || butID > 18) && butID < 110)
+        if (butID > 3 && (butID < 12 || butID > 19) && butID < 110)
           butinz[a].innerHTML =
             '<img class="butin" src="' +
             'https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png"' +
@@ -245,8 +276,8 @@ function reset(sent) {
           .insertBefore(code, document.getElementById("RW"));
       }
       col = document.querySelectorAll("td");
-      a = 15;
-      while (a < 23) {
+      a = 16;
+      while (a < 24) {
         col[a].firstElementChild.setAttribute("class", "noBac");
         a++;
       }
@@ -257,7 +288,7 @@ function reset(sent) {
     a = 0;
     while (a < butinz.length) {
       var butID = parseInt(butinz[a].id);
-      if (butID > 2 && (butID < 11 || butID > 18) && butID < 110)
+      if (butID > 3 && (butID < 12 || butID > 19) && butID < 110)
         butinz[a].innerHTML =
           '<img class="butin" src="' +
           'https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png"' +
@@ -293,7 +324,7 @@ function reset(sent) {
       imij.setAttribute("class", "noBac");
       imij.setAttribute("onclick", "submit()");
       document.getElementById("113").innerHTML =
-        "<img class='noBac' id='curect' src='https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-6/177800/270-512.png'>";
+        "<img class='noBac' id='curect' src='https://i.ibb.co/YfF49Wd/2176530.png'>";
       // document
       //   .querySelector("span")
       //   .insertBefore(imij, document.getElementById("000"));
@@ -302,8 +333,8 @@ function reset(sent) {
         .insertBefore(code, document.getElementById("RW"));
     }
     col = document.querySelectorAll("td");
-    a = 15;
-    while (a < 23) {
+    a = 16;
+    while (a < 24) {
       col[a].firstElementChild.setAttribute("class", "noBac");
       a++;
     }
@@ -341,8 +372,8 @@ socit.on("code", (l) => {
       '<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
     );
   col = document.querySelectorAll("td");
-  a = 15;
-  while (a < 23) {
+  a = 16;
+  while (a < 24) {
     col[a].firstElementChild.setAttribute("class", "noBac");
     a++;
   }
