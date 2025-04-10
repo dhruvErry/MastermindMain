@@ -118,6 +118,8 @@ function init() {
   cursor["red"] = "https://i.ibb.co/n3Y4cV1/red.png";
   cursor["redPin"] = "https://i.ibb.co/DQX2XFf/redPin.png";
   cursor["wytPin"] = "https://i.ibb.co/VVnQBPX/wytPin.png";
+  cursor["trash"] = "https://i.ibb.co/vCtQZqBy/trash.png";
+
   imijiz = {};
   imijiz["black"] = "https://i.ibb.co/9372X2b/blac.png";
   imijiz["blue"] = "https://i.ibb.co/5vp1V3S/blue.png";
@@ -129,8 +131,7 @@ function init() {
   imijiz["red"] = "https://i.ibb.co/QHt1CDv/red.png";
   imijiz["redPin"] = "https://i.imgur.com/nBsXJBa.png";
   imijiz["wytPin"] = "https://i.ibb.co/vYt93Tb/glosee.png";
-  imijiz["trash"] =
-    "https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png";
+  imijiz["trash"] = "https://www.freeiconspng.com/uploads/glossy-button-black-icon-10.png";
 }
 
 init();
@@ -154,9 +155,9 @@ socit.on("ges", (guess) => {
     if (col === "redPin" || col === "wytPin")
       document.getElementById(num).innerHTML =
         '<img id="pinz" src="' + imijiz[col] + '">';
-    // else if (col === "trash")
-    //   document.getElementById(num).innerHTML =
-    //     '<img id="butin" src="' + imijiz[col] + '">';
+    else if (col === "trash")
+      document.getElementById(num).innerHTML =
+        '<img class="butin" src="' + imijiz[col] + '">';
     else
       document.getElementById(num).innerHTML =
         '<img src="' + imijiz[col] + '">';
@@ -184,15 +185,21 @@ function clict() {
     colour = cul;
     ges = wich + " " + colour;
     socit.emit("ges", { guess: ges, rom: room });
-    if (cul != "redPin" && cul != "wytPin") {
-      var cursed = "url(" + cursor[colour] + "),move";
-      document.querySelector("body").style.cursor = cursed;
-    } else if (cul === "redPin")
+    console.log(cul);
+    if (cul === "redPin") {
       document.querySelector("body").style.cursor =
         "url(" + "https://i.ibb.co/jkNJSQy/red-Cursor.png" + "),move";
-    else
+    } else if (cul === "wytPin") {
       document.querySelector("body").style.cursor =
         "url(" + "https://i.ibb.co/dgw525d/wyt-Cursor.png" + "),move";
+    } else if (cul === "trash") {
+      console.log('reecht')
+      document.querySelector("body").style.cursor =
+        "url(" + cursor["trash"] + "),move";
+    } else {
+      var cursed = "url(" + cursor[colour] + "),move";
+      document.querySelector("body").style.cursor = cursed;
+    }
   } else {
     ges = wich + " " + colour;
     socit.emit("ges", { guess: ges, rom: room });
