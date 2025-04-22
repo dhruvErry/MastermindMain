@@ -1,3 +1,51 @@
+// Moved from inline HTML script
+const spa = document.getElementById('spa');
+const colzTable = document.getElementById('colz');
+
+colzTable.parentNode.removeChild(colzTable);
+
+for (let i = 9; i >= 0; i--) {
+  const feedbackTableId = `00${i}`;
+  const guessTableId = `0${i}`;
+
+  const feedbackTable = document.createElement('table');
+  feedbackTable.id = feedbackTableId;
+  feedbackTable.innerHTML = `
+    <tr>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+    </tr>
+  `;
+
+  const guessTable = document.createElement('table');
+  guessTable.id = guessTableId;
+  guessTable.className = 'after';
+  guessTable.innerHTML = `
+    <tr>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+      <td align="center"><img src="#" style="visibility: hidden;" class="cept" /></td>
+    </tr>
+  `;
+
+  spa.appendChild(feedbackTable);
+  spa.appendChild(guessTable);
+
+  if (i === 9) {
+    spa.appendChild(colzTable);
+  }
+
+  if (i > 0) {
+    const br = document.createElement('br');
+    spa.appendChild(br);
+  }
+}
+
 var socit = io();
 var room,
   colour,
@@ -211,7 +259,7 @@ function clict() {
   }
 }
 var all = document.querySelectorAll("td");
-console.log("test");
+console.log("new test");
 a = 0;
 var d = 0;
 while (a < all.length) {
