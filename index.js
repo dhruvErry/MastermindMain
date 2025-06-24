@@ -22,6 +22,10 @@ app.get("/play", function (req, res) {
   res.render("game.html");
 });
 
+app.get("/join", function (req, res) {
+  res.render("join.html");
+});
+
 app.get("/", function (req, res) {
   res.render("roolz.html");
 });

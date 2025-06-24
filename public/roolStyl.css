@@ -42,3 +42,184 @@ input {
   font-family: "nawmil";
   font-size: 25px;
 }
+
+/* Join page styles */
+.join-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: transparent !important;
+  font-family: 'myFont', Arial, sans-serif;
+  padding-top: 0;
+}
+
+.join-container h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: 'myFont', cursive;
+  font-size: 25px;
+}
+
+.join-heading {
+  font-family: 'myFont', Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 2.5rem;
+  color: #222;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  text-shadow: none !important;
+}
+
+.join-form {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  padding: 2em 2.5em 2em 2.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  min-width: 340px;
+  align-items: stretch;
+}
+
+.join-form input {
+  padding: 1em;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  font-family: 'myFont', Arial, sans-serif;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.join-form input::placeholder {
+  color: #444;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.join-btn {
+  background: #a82323;
+  color: #fff;
+  font-family: 'myFont', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border: 2px solid #111;
+  padding: 0.7em 1.5em;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 1em;
+  align-self: center;
+}
+
+.join-btn:hover {
+  background: #7a1818;
+  color: #fff;
+}
+
+.error-message {
+  color: #ff6b6b;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.role-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent !important;
+  padding: 0.5em 0 0 0;
+  margin-top: 0.5em;
+  gap: 1.2em;
+}
+
+.role-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5em;
+  margin-bottom: 1em;
+  background: transparent !important;
+}
+
+.role-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent !important;
+}
+
+.role-option input[type="radio"] {
+  width: 1.3em;
+  height: 1.3em;
+  accent-color: #a82323;
+  margin-bottom: 0.2em;
+}
+
+.role-option span {
+  background: transparent !important;
+  margin-top: 0.7em;
+  color: #a82323;
+  font-family: 'myFont', Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  margin-bottom: 0;
+}
+
+.role-selection button {
+  background: #a82323;
+  color: #fff;
+  font-family: 'myFont', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  border: 2px solid #111;
+  padding: 0.6em 1.3em;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 1em;
+  align-self: center;
+}
+
+.role-selection button:hover {
+  background: #7a1818;
+  color: #fff;
+}
+
+.red-title {
+  color: #a82323 !important;
+  text-shadow: none !important;
+}
+
+.join-heading, .red-title, .join-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+body > h2, body > form {
+  align-self: center;
+  text-align: center;
+}

@@ -1,42 +1,6 @@
 <!DOCTYPE html>
-<html class="ceep">
-  <body class="ceep">
-    <input
-      class="ceep fontz"
-      type="text"
-      name="roomNaym"
-      placeholder="Room Name"
-    />
-    <input class="ceep fontz" type="text" id="naym" placeholder="Your Name" />
-    <button class="ceep fontz" type="button" onclick="createRoom()">
-      Enter Room
-    </button>
-    <p id="error" class="cept fontz">Room Full!</p>
-    <p class="hyd dil fontz" id="edit" style="visibility: hidden;">
-      Which one?
-    </p>
-    <input
-      class="hyd rad fontz"
-      style="visibility: hidden;"
-      type="radio"
-      name="mode"
-      value="maker"
-    /><span class="hyd dil fontz">CodeMaker</span>
-    <input
-      class="hyd rad fontz"
-      style="visibility: hidden;"
-      type="radio"
-      name="mode"
-      value="guesser"
-    /><span class="hyd dil fontz">CodeGuesser</span>
-    <button
-      class="hyd fontz"
-      style="visibility: hidden;"
-      type="button"
-      onclick="play(true)"
-    >
-      Master the Mind!
-    </button>
+<html>
+  <body>
     <p id="not" class="fontz"></p>
     <table id="cowd">
       <tr>
@@ -130,7 +94,7 @@
     </span>
   </body>
 
-  <head class="ceep">
+  <head>
     <title>MasterMind</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P"

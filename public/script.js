@@ -63,6 +63,70 @@ var room,
   ges,
   aaft,
   a = 0;
+
+// Initialize room and player info from URL parameters
+function initializeFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  room = urlParams.get('room');
+  const role = urlParams.get('role');
+  
+  if (room && role) {
+    guesser = role === 'guesser';
+    // Join the room automatically
+    socit.emit("createRoom", room);
+    // Set up initial game state UI
+    setupInitialGameState();
+  } else {
+    // Redirect to join page if parameters are missing
+    window.location.href = '/join';
+  }
+}
+
+function setupInitialGameState() {
+  if (guesser === true) {
+    // CodeGuesser - waiting for opponent to set code
+    document.querySelector("#not").innerHTML = "Waiting for opponent to set code...";
+    document.querySelector("#cowd").style.visibility = "hidden";
+    document.querySelector("#colz").style.visibility = "";
+    document.querySelector("#RW").style.visibility = "hidden";
+    count = 0;
+  } else {
+    // CodeMaker - set code now
+    document.querySelector("#not").innerHTML = "Set code now!";
+    document.querySelector("#cowd").style.visibility = "";
+    document.querySelector("#colz").style.visibility = "";
+    document.querySelector("#RW").style.visibility = "";
+    
+    // Create submit button for CodeMaker
+    code = document.createElement("img");
+    code.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
+    code.setAttribute("id", "kode");
+    code.setAttribute("class", "noBac");
+    code.setAttribute("onclick", "submitCode()");
+    
+    imij = document.createElement("img");
+    imij.setAttribute("src", "https://i.ibb.co/ck0G1KW/subMit.png");
+    imij.setAttribute("id", "submitMayc");
+    imij.setAttribute("class", "noBac");
+    imij.setAttribute("onclick", "submit()");
+    
+    document.getElementById("113").innerHTML =
+      "<img class='noBac' id='curect' src='https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-6/177800/270-512.png'>";
+    
+    document.querySelector("body").insertBefore(code, document.getElementById("RW"));
+    
+    count = -1;
+  }
+  
+  // Set up color cells
+  col = document.querySelectorAll("td");
+  a = 16;
+  while (a < 24) {
+    col[a].firstElementChild.setAttribute("class", "noBac");
+    a++;
+  }
+}
+
 var put = document.querySelectorAll("td");
 while (a < put.length) {
   if (!put[a].className.includes("noGray"))
@@ -72,37 +136,55 @@ while (a < put.length) {
       ">";
   a++;
 }
-var ol = document.getElementsByTagName("*");
-a = 0;
-while (a < ol.length) {
-  if (!ol[a].className.includes("ceep")) ol[a].style.visibility = "hidden";
-  a++;
-}
+
 socit.on("connect", function () {
-  // console.log("Chaynd");
+  console.log("Connected to server");
+  initializeFromURL();
 });
 
-function createRoom() {
-  room = document.querySelector("input").value;
-  naym = document.querySelector("#naym").value;
-  socit.emit("createRoom", room);
-  socit.emit("newPlayer", naym);
-}
-
-socit.on("fuust", (y) => {
-  document.querySelector("#error").style.visibility = "hidden";
-  choozMode();
+socit.on("ges", (guess) => {
+  if (guess[1] === " ") {
+    num = guess[0];
+    col = guess.substring(2);
+  } else {
+    num = guess[0] + guess[1];
+    col = guess.substring(3);
+  }
+  var numd = parseInt(num);
+  if (
+    numd != 111 &&
+    numd != 112 &&
+    numd != 113 &&
+    numd != 114 &&
+    !(numd > 11 && numd < 20)
+  ) {
+    console.log(col);
+    if (col === "redPin" || col === "wytPin")
+      document.getElementById(num).innerHTML =
+        '<img id="pinz" src="' + imijiz[col] + '">';
+    else if (col === "trash")
+      document.getElementById(num).innerHTML =
+        '<img class="butin" src="' + imijiz[col] + '">';
+    else
+      document.getElementById(num).innerHTML =
+        '<img src="' + imijiz[col] + '">';
+  }
 });
 
-socit.on("secind", (y) => {
-  document.querySelector("#edit").style.visibility = "";
-  document.querySelector("#edit").innerHTML =
-    "Waiting for opponent to choose role...";
-});
-
-socit.on("secindPlay", (bool) => {
-  guesser = !bool;
-  play(false);
+socit.on("code", (l) => {
+  document.querySelector("#not").innerHTML = "Make your guess!";
+  document
+    .getElementById("00")
+    .insertAdjacentHTML(
+      "afterend",
+      '<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
+    );
+  col = document.querySelectorAll("td");
+  a = 16;
+  while (a < 24) {
+    col[a].firstElementChild.setAttribute("class", "noBac");
+    a++;
+  }
 });
 
 socit.on("curect", (r) => {
@@ -111,48 +193,9 @@ socit.on("curect", (r) => {
   setTimeout(reset, 3000, false);
 });
 
-socit.on("eruu", (g) => {
-  document.querySelector("#error").style.visibility = "";
-});
-
 socit.on("disconnect", (p) => {
   socit.emit("chec", p);
 });
-
-function choozMode() {
-  var hydz = document.querySelectorAll(".hyd");
-  a = 0;
-  while (a < hydz.length) {
-    hydz[a].style.visibility = "";
-    a++;
-  }
-}
-
-function play(bool) {
-  if (bool) {
-    var radz = document.querySelectorAll(".rad");
-    if (radz[0].checked) guesser = true;
-    else guesser = false;
-    socit.emit("fuust", { bool: guesser, rom: room });
-  }
-  var rim = document.querySelectorAll("input");
-  var rim2 = document.querySelectorAll("button");
-  var rim3 = document.querySelectorAll(".dil");
-  a = 0;
-  while (a < rim.length) {
-    rim[a].remove();
-    if (rim2[a] != null) rim2[a].remove();
-    if (rim3[a] != null) rim3[a].remove();
-    a++;
-  }
-  a = 0;
-  var ol = document.getElementsByTagName("*");
-  while (a < ol.length) {
-    if (!ol[a].className.includes("cept")) ol[a].style.visibility = "";
-    a++;
-  }
-  reset(false);
-}
 
 function init() {
   cursor = {};
@@ -183,34 +226,6 @@ function init() {
 }
 
 init();
-socit.on("ges", (guess) => {
-  if (guess[1] === " ") {
-    num = guess[0];
-    col = guess.substring(2);
-  } else {
-    num = guess[0] + guess[1];
-    col = guess.substring(3);
-  }
-  var numd = parseInt(num);
-  if (
-    numd != 111 &&
-    numd != 112 &&
-    numd != 113 &&
-    numd != 114 &&
-    !(numd > 11 && numd < 20)
-  ) {
-    console.log(col);
-    if (col === "redPin" || col === "wytPin")
-      document.getElementById(num).innerHTML =
-        '<img id="pinz" src="' + imijiz[col] + '">';
-    else if (col === "trash")
-      document.getElementById(num).innerHTML =
-        '<img class="butin" src="' + imijiz[col] + '">';
-    else
-      document.getElementById(num).innerHTML =
-        '<img src="' + imijiz[col] + '">';
-  }
-});
 
 function clict() {
   // set id of code
@@ -417,22 +432,6 @@ function submitCode() {
   document.querySelector("#colz").style.visibility = "hidden";
   socit.emit("code", room);
 }
-
-socit.on("code", (l) => {
-  document.querySelector("#not").innerHTML = "Make your guess!";
-  document
-    .getElementById("00")
-    .insertAdjacentHTML(
-      "afterend",
-      '<img class="noBac" class="noGray" id="submitGes" onclick="submit()" src="https://i.ibb.co/ck0G1KW/subMit.png">'
-    );
-  col = document.querySelectorAll("td");
-  a = 16;
-  while (a < 24) {
-    col[a].firstElementChild.setAttribute("class", "noBac");
-    a++;
-  }
-});
 
 socit.on("sub", (sub) => {
   count++;

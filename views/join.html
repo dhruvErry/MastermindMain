@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Join Room - MasterMind</title>
+    <link rel="stylesheet" href="styl.css" />
+    <link rel="stylesheet" href="roolStyl.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="join.js"></script>
+    <style>
+      body {
+        font-family: 'myFont', Arial, sans-serif;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .join-heading {
+        font-family: 'myFont', Arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 2.5rem;
+        color: #a82323;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="join-container">
+      <h1 class="join-heading red-title">JOIN ROOM - MASTERMIND ONLINE</h1>
+      <form class="join-form">
+        <input class="fontz" type="text" name="roomNaym" placeholder="Room Name" />
+        <button class="join-btn" type="button" onclick="createRoom()">PLAY NOW</button>
+        <p id="error" class="fontz error-message" style="visibility: hidden;">Room Full!</p>
+        <p class="fontz" id="edit" style="visibility: hidden;">Which one?</p>
+        <div class="role-selection" style="visibility: hidden;">
+          <div class="role-options">
+            <div class="role-option">
+              <input class="rad fontz" type="radio" name="mode" value="maker" />
+              <span class="dil fontz">CodeMaker</span>
+            </div>
+            <div class="role-option">
+              <input class="rad fontz" type="radio" name="mode" value="guesser" />
+              <span class="dil fontz">CodeGuesser</span>
+            </div>
+          </div>
+          <button class="fontz" type="button" onclick="play(true)">Master the Mind!</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html> 
